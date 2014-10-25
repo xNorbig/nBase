@@ -1,0 +1,1550 @@
+#──────────────────────────────────────────────────────────────────────────────────────
+#─██████──────────██████─██████████████───██████████████─██████████████─██████████████─
+#─██░░██████████──██░░██─██░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
+#─██░░░░░░░░░░██──██░░██─██░░██████░░██───██░░██████░░██─██░░██████████─██░░██████████─
+#─██░░██████░░██──██░░██─██░░██──██░░██───██░░██──██░░██─██░░██─────────██░░██─────────
+#─██░░██──██░░██──██░░██─██░░██████░░████─██░░██████░░██─██░░██████████─██░░██████████─
+#─██░░██──██░░██──██░░██─██░░░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
+#─██░░██──██░░██──██░░██─██░░████████░░██─██░░██████░░██─██████████░░██─██░░██████████─
+#─██░░██──██░░██████░░██─██░░██────██░░██─██░░██──██░░██─────────██░░██─██░░██─────────
+#─██░░██──██░░░░░░░░░░██─██░░████████░░██─██░░██──██░░██─██████████░░██─██░░██████████─
+#─██░░██──██████████░░██─██░░░░░░░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
+#─██████──────────██████─████████████████─██████──██████─██████████████─██████████████─
+#──────────────────────────────────────────────────────────────────────────────────────
+#
+#                                    Skrypt tworzą:
+#                                    » Norbi
+#                                    » tropereks
+#
+#                                    Regulamin skryptu
+# » Zakaz podszywania się pod autora
+# » Zakaz usuwania informacji o autorze
+# » Zakaz zmieniania nazwy skryptu
+# » Zakaz udostępniania zmodyfikowanego skryptu
+# » Zakaz używania danych części kodu skryptu
+#
+# »»» Jeżeli chcesz się więcej dowiedzieć, napisz do Norbi'ego
+#──────────────────────────────────────────────────────────────────────────────────────
+command /nBase:nBase [<text="brak">] [<text="brak">]:
+	description: nBase » Glowna komenda skryptu.
+	executable by: players
+	aliases: nbase, skentials, ske, nb
+	trigger:
+		if arg 1 is not "autor" or "reload":
+			send "&9=================================================="
+			send "  &7Uzyj: &6/nBase <argument> <argument>&7:"
+			send "    &9» &6autor <Norbi&7|&6tropereks> &8-- &7Informacje o danym autorze."
+			send "    &9» &6reload &8-- &7Przeladowanie skryptu."
+			send "&9=================================================="
+		if arg 1 is "autor":
+			if arg 2 is not "Norbi" or "tropereks":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/nBase autor <Norbi|tropereks>"
+			if arg 2 is "Norbi":
+				send "&9=================================================="
+				send "  &7Autor: &6Norbi&7/&6norbi002&7/&6xNorbi"
+				send "    &9» &7Skype: &6super.norbi"
+				send "&9=================================================="
+			if arg 2 is "tropereks":
+				send "&9=================================================="
+				send "  &7Autor: &6tropereks&7/&6tropek"
+				send "    &9» &7Skype: &6faldir2"
+				send "&9=================================================="
+		if arg 1 is "reload":
+			if player has permission "nBase.reload" or "nBase.*":
+				send "&7[&anBase&7]   &9» &7Przeladowuje &6%script%&7..."
+				execute player command "sk reload %script%"
+				send "&7[&anBase&7]   &9» &7Przeladowano &6%script%&7."
+			else:
+				send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.reload)"
+command /nBase:break:
+	description: nBase » Niszczenie zaznaczonego bloku.
+	executable by: players
+	aliases: break
+	trigger:
+		if player has permission "nBase.break" or "nBase.*":
+			if targeted block is not air:
+				if targeted block is not bedrock:
+					send "&7[&anBase&7]   &9» &7Zniszczono blok: &6%targeted block%&7."
+					set targeted block to air
+				else:
+					if player has permission "nBase.break.bedrock" or "nBase.*":
+						send "&7[&anBase&7]   &9» &7Zniszczono blok: &6%targeted block%&7."
+						set targeted block to air
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.break.bedrock)"
+			else:
+				send "&7[&anBase&7]   &9» &7Nie mozesz zniszczyc powietrza."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.break)"
+command /nBase:feed [<player>]:
+	description: nBase » Nasycanie graczy.
+	executable by: players
+	aliases: feed
+	trigger:
+		if player has permission "nBase.feed" or "nBase.*":
+			if arg 1 is not set:
+				set player's food level to 10
+				send "&7[&anBase&7]   &9» &7Nasycono gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.feed.others" or "nBase.*":
+					set arg 1's food level to 10
+					send "&7[&anBase&7]   &9» &7Nasycono gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.feed.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.feed)"
+command /nBase:gamemode [<text="brak">] [<player>]:
+	description: nBase » Zmienianie trybu gry graczy.
+	executable by: players
+	aliases: gamemode, gm, bukkit:gamemode, minecraft:gamemode
+	trigger:
+		if player has permission "nBase.gamemode" or "nBase.*":
+			if arg 1 is not "0" or "survival" or "s" or "1" or "creative" or "c" or "2" or "adventure" or "a":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/gamemode <0&7|&61&7|&62> [gracz]"
+			if arg 1 is "0" or "survival" or "s":
+				if arg 2 is not set:
+					set player's gamemode to survival
+					send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%player% &7na: &6survival&7."
+				else:
+					if player has permission "nBase.gamemode.others" or "nBase.*":
+						set arg 2's gamemode to survival
+						send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%arg 2% &7na: &6survival&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.gamemode.others)"
+			if arg 1 is "1" or "creative" or "c":
+				if arg 2 is not set:
+					set player's gamemode to creative
+					send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%player% &7na: &6creative&7."
+				else:
+					if player has permission "nBase.gamemode.others" or "nBase.*":
+						set arg 2's gamemode to creative
+						send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%arg 2% &7na: &6creative&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.gamemode.others)"
+			if arg 1 is "2" or "adventure" or "a":
+				if arg 2 is not set:
+					set player's gamemode to adventure
+					send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%player% &7na: &6adventure&7."
+				else:
+					if player has permission "nBase.gamemode.others" or "nBase.*":
+						set arg 2's gamemode to adventure
+						send "&7[&anBase&7]   &9» &7Zmieniono tryb gry gracza: &6%arg 2% &7na: &6adventure&7&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.gamemode.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.gamemode)"
+command /nBase:god [<player>]:
+	description: nBase » Wlaczanie|Wylaczanie niesmiertelnosci.
+	executable by: players
+	aliases: god
+	trigger:
+		if player has permission "nBase.god" or "nBase.*":
+			if arg 1 is not set:
+				if {nBase::god::%player%} is true:
+					set {nBase::god::%player%} to false
+					send "&7[&anBase&7]   &9» &7Niesmiertelnosc: &cWYLACZONA&7."
+				else:
+					set {nBase::god::%player%} to true
+					send "&7[&anBase&7]   &9» &7Niesmiertelnosc: &aWLACZONA&7."
+			else:
+				if player has permission "nBase.god.others" or "nBase.*":
+					if {nBase::god::%arg 1%} is true:
+						set {nBase::god::%arg 1%} to false
+						send "&7[&anBase&7]   &9» &7Niesmiertelnosc gracza: &6%arg 1%&7: &cWYLACZONA&7."
+					else:
+						set {nBase::god::%arg 1%} to true
+						send "&7[&anBase&7]   &9» &7Niesmiertelnosc gracza: &6%arg 1%&7: &aWLACZONA&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.god.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.god)"
+command /nBase:hat:
+	description: nBase » Zakladanie przemiotu na glowe.
+	executable by: players
+	aliases: hat
+	trigger:
+		if player has permission "nBase.hat" or "nBase.*":
+			set {_o} to player's helmet
+			set {_n} to player's tool
+			set player's helmet to {_n}
+			set player's tool to {_o}
+			set {_} to player's helmet
+			send "&7[&anBase&7]   &9» &7Zalozono: &6%player's helmet%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.hat)"
+command /nBase:heal [<player>]:
+	description: nBase » Uleczanie graczy.
+	executable by: players
+	aliases: heal
+	trigger:
+		if player has permission "nBase.heal" or "nBase.*":
+			if arg 1 is not set:
+				set player's food level to 10
+				heal player
+				send "&7[&anBase&7]   &9» &7Uleczono gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.heal.others" or "nBase.*":
+					set arg 1's food level to 10
+					heal arg 1
+					send "&7[&anBase&7]   &9» &7Uleczono gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.heal.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.heal)"
+command /nBase:repair [<text="brak">]:
+	description: nBase » Naprawianie wytrzymalosci przedmiotow.
+	executable by: players
+	aliases: repair, fix
+	trigger:
+		if player has permission "nBase.repair" or "nBase.*":
+			if arg 1 is not "hand" or "all":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/repair <hand&7|&6all>"
+			if arg 1 is "hand":
+				repair player's tool
+				send "&7[&anBase&7]   &9» &7Naprawiono: &6%player's tool%&7."
+			if arg 1 is "all":
+				repair all items in player's inventory
+				send "&7[&anBase&7]   &9» &7Naprawiono: &6all&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.repair)"
+command /nBase:head [<offlineplayer>]:
+	description: nBase » Otrzymywanie glowy danego gracza.
+	executable by: players
+	aliases: head, skull
+	trigger:
+		if player has permission "nBase.head" or "nBase.*":
+			if arg 1 is not set:
+				give player's skull to player
+				send "&7[&anBase&7]   &9» &7Przywolano glowe gracza: &6%player%&7."
+			else:
+				give arg 1's skull to player
+				send "&7[&anBase&7]   &9» &7Przywolano glowe gracza: &6%arg 1%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.head)"
+command /nBase:time [<text="brak">]:
+	description: nBase » Ustawianie czasu na swiecie.
+	executable by: players
+	aliases: time, bukkit:time, minecraft:time
+	trigger:
+		if player has permission "nBase.time" or "nBase.*":
+			if arg 1 is not "day" or "night":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/time <day&7|&6night>"
+			if arg 1 is "night":
+				set world's time to 22:00
+				send "&7[&anBase&7]   &9» &7Zmieniono czas na: &622:00&7."
+			if arg 1 is "day":
+				set world's time to 6:00
+				send "&7[&anBase&7]   &9» &7Zmieniono czas na: &66:00&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.time)"
+command /nBase:getpos [<player>]:
+	description: nBase » Otrzymywanie koordynatow graczy.
+	executable by: players
+	aliases: getpos
+	trigger:
+		if player has permission "nBase.getpos" or "nBase.*":
+			if arg 1 is not set:
+				send "&9=================================================="
+				send "  &7Koordynaty gracza: &6%player%"
+				send "    &9» &7X: &6%player's x-location%"
+				send "    &9» &7Y: &6%player's y-location%"
+				send "    &9» &7Z: &6%player's z-location%"
+				send "&9=================================================="
+			else:
+				if player has permission "nBase.getpos.others":
+					send "&9=================================================="
+					send "  &7Koordynaty gracza: &6%arg 1%"
+					send "    &9» &7X: &6%arg 1's x-location%"
+					send "    &9» &7Y: &6%arg 1's y-location%"
+					send "    &9» &7Z: &6%arg 1's z-location%"
+					send "&9=================================================="
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.getpos.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.getpos)"
+command /nBase:helpop [<text>]:
+	description: nBase » Wysylanie wiadomosci do administracji.
+	executable by: players
+	aliases: helpop
+	trigger:
+		if player has permission "nBase.helpop" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/helpop <tekst>"
+			else:
+				loop all players:
+					loop-player has permission "nBase.helpop.receive" or "nBase.*":
+						add 1 to {_}
+						send "&b[HELPOP] &6%player%&7: %arg 1%" to loop-player
+						{_} is not set:
+							send "&7[&anBase&7]   &9» &7Aktualnie nie ma nikogo obecnego z administracji."
+				if player doesn't have permission "nBase.helpop.receive" or "nBase.*":
+					send "&b[HELPOP] &6%player%&7: %arg 1%"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.helpop)"
+command /nBase:id:
+	description: nBase » Sprawdzanie id itemu.
+	executable by: players
+	aliases: id, itemdb
+	trigger:
+		if player has permission "nBase.id" or "nBase.*":
+			if player's tool is hand:
+				send "&7[&anBase&7]   &9» &7ID: &60&7."
+			else:
+				set {_} to data value of player's tool
+				{_} is 0:
+					send "&7[&anBase&7]   &9» &7ID: &6%id of player's tool% &7(%player's tool%)"
+				else:
+					send "&7[&anBase&7]   &9» &7ID: &6%id of player's tool%&7:&6%data value of player's tool%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.id)"
+command /nBase:list:
+	description: nBase » Lista graczy na serwerze.
+	executable by: players
+	aliases: list, who, bukkit:list, bukkit:who, minecraft:list, minecraft:who
+	trigger:
+		if player has permission "nBase.list" or "nBase.*":
+			open chest with 6 rows named "&aLista graczy: &7(%number of all players%)" to player
+			loop all players:
+				add 1 to {_}
+				format slot {_}-1 of player with 1 of head:3 named "&f%loop-player%" to be unstealable
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.list)"
+command /nBase:me [<text>]:
+	description: nBase » Wysyla specjalna wiadomosc do wszystkich.
+	executable by: players
+	aliases: me, bukkit:me, minecraft:me
+	trigger:
+		if player has permission "nBase.me" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/me <tekst>"
+			else:
+				if player has permission "nBase.me.color" or "nBase.*":
+					broadcast "&b[MYSELF] &6%player%&7: %colored arg 1%"
+				else:
+					broadcast "&b[MYSELF] &6%player%&7: %arg 1%"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.me)"
+command /nBase:message [<player>] [<text>]:
+	description: nBase » Wysylanie prywatnych wiadomosci do graczy.
+	executable by: players
+	aliases: message, msg, m, t, tell, whisper, whispers, bukkit:msg, bukkit:m, bukkit:t, bukkit:tell, bukkit:whisper, bukkit:whispers, minecraft:msg, minecraft:m, minecraft:t, minecraft:tell, minecraft:whisper, minecraft:whispers
+	trigger:
+		if player has permission "nBase.message" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/msg <gracz> <tekst>"
+			else:
+				if arg 2 is set:
+					if player has permission "nBase.message.color" or "nBase.*":
+						send "&b[MSG] &7[&6Ja &7» &6%arg 1%&7] &7%colored arg 2%"
+						send "&b[MSG] &7[&6%player% &7» &6Ja&7] &7%colored arg 2%" to arg 1
+					else:
+						send "&b[MSG] &7[&6Ja &7» &6%arg 1%&7] &7%arg 2%"
+						send "&b[MSG] &7[&6%player% &7» &6Ja&7] &7%arg 2%" to arg 1
+				else:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/msg <gracz> <tekst>"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.message)"
+command /nBase:nick [<text>] [<player>]:
+	description: nBase » Zmiana serwerowego przezwiska.
+	executable by: players
+	aliases: nick, displayname
+	trigger:
+		if player has permission "nBase.nick" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/nick <tekst>"
+				send "&7[&anBase&7]   &9» &7Aby przywrocic swoja zwykla nazwe uzyj: &6/nick -off&7."
+			else:
+				if arg 1 is not "-off":
+					if arg 2 is not set:
+						set player's display name to "%colored arg 1%"
+						set player's tablist name to "%colored arg 1%"
+						send "&7[&anBase&7]   &9» &7Nowe przezwisko gracza: &6%player% &7to &6%colored arg 1%&7."
+					else:
+						if player has permission "nBase.nick.others" or "nBase.*":
+							set arg 2's display name to "%colored arg 1%"
+							set arg 2's tablist name to "%colored arg 1%"
+							send "&7[&anBase&7]   &9» &7Nowe przezwisko gracza: &6%arg 2% &7to &6%colored arg 1%&7."
+						else:
+							send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.nick.others)"
+				else:
+					if arg 2 is not set:
+						set player's display name to "%player%"
+						set player's tablist name to "%player%"
+						send "&7[&anBase&7]   &9» &7Nowe przezwisko gracza: &6%player% &7to &6%player%&7."
+					else:
+						if player has permission "nBase.nick.others" or "nBase.*":
+							set arg 2's display name to "%arg 2%"
+							set arg 2's tablist name to "%arg 2%"
+							send "&7[&anBase&7]   &9» &7Nowe przezwisko gracza: &6%arg 2% &7to &6%colored arg 1%&7."
+						else:
+							send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.nick.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.nick)"
+command /nBase:whois [<player>]:
+	description: nBase » Sprawdzanie informacji o danym graczus.
+	executable by: players
+	aliases: whois
+	trigger:
+		if player has permission "nBase.whois":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/whois <gracz>"
+			else:
+				set {_} to {nBase::god::%arg 1%}
+				{_} is "true":
+					set {_} to "&aWLACZONA"
+				else:
+					set {_} to "&cWYLACZONA"
+				send "&9=================================================="
+				send "  &7Gracz: &6%arg 1%"
+				send "    &9» &7Niesmiertelnosc: &6%{_}%"
+				send "    &9» &7IP: &6%arg 1's ip%"
+				send "    &9» &7Gamemode: &6%arg 1's gamemode%"
+				send "    &9» &7Przezwisko: &6%arg 1's display name%"
+				send "    &9» &7Poziom: &6%arg 1's level%"
+				send "    &9» &7Progres poziomu: &6%arg 1's level progress%"
+				send "    &9» &7Zycie: &6%arg 1's health%"
+				send "    &9» &7Najedzenie: &6%arg 1's food level%"
+				send "    &9» &7Lokacja:"
+				send "      &9* &7X: &6%arg 1's x-location%"
+				send "      &9* &7Y: &6%arg 1's y-location%"
+				send "      &9* &7Z: &6%arg 1's z-location%"
+				send "&9=================================================="
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.whois)"
+command /nBase:antioch:
+	description: nBase » Strzelanie TNT.
+	executable by: players
+	aliases: antioch, grenade, granade, tnt
+	trigger:
+		if player has permission "nBase.antioch" or "nBase.*":
+			shoot a tnt from player at speed 1.2
+			send "&7[&anBase&7]   &9» &7Wystrzelono tnt."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.antioch)"
+command /nBase:broadcast [<text>]:
+	description: nBase » Ogloszenie.
+	executable by: players
+	aliases: broadcast, bc, say, bukkit:say
+	trigger:
+		if player has permission "nBase.broadcast" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/broadcast <tekst>"
+			else:
+				broadcast "&b[BROADCAST] &6%colored arg 1%"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.broadcast)"
+command /nBase:burn [<player>]:
+	description: nBase » Podpalanie graczy.
+	executable by: players
+	aliases: burn, fire
+	trigger:
+		if player has permission "nBase.burn" or "nBase.*":
+			if arg 1 is not set:
+				ignite player
+				send "&7[&anBase&7]   &9» &7Podpalono gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.burn.others" or "nBase.*":
+					ignite arg 1
+					send "&7[&anBase&7]   &9» &7Podpalono gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.burn.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.burn)"
+command /nBase:clearinventory [<player>]:
+	description: nBase » Czyszczenie ekwipunku.
+	executable by: players
+	aliases: clearinventory, clear, ci, bukkit:clear, minecraft:clear
+	trigger:
+		if player has permission "nBase.clearinventory" or "nBase.*":
+			if arg 1 is not set:
+				clear player's inventory
+				send "&7[&anBase&7]   &9» &7Wyczyszczono ekwipunek gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.clearinventory.others" or "nBase.*":
+					clear arg 1's inventory
+					send "&7[&anBase&7]   &9» &7Wyczyszczono ekwipunek gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.clearinventory.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.clearinventory)"
+command /nBase:enderchest [<player>]:
+	description: nBase » Otwieranie skrzyni kresu graczy.
+	executable by: players
+	aliases: enderchest, endersee, echest
+	trigger:
+		if player has permission "nBase.enderchest" or "nBase.*":
+			if arg 1 is not set:
+				open player's enderchest for player
+				send "&7[&anBase&7]   &9» &7Otworzono skrzynie kresu gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.enderchest.others" or "nBase.*":
+					open arg 1's enderchest for player
+					send "&7[&anBase&7]   &9» &7Otworzono skrzynie kresu gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.enderchest.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.enderchest)"
+command /nBase:fireball:
+	description: nBase » Strzelanie kula ghasta.
+	executable by: players
+	aliases: fireball, fb
+	trigger:
+		if player has permission "nBase.fireball" or "nBase.*":
+			shoot a fireball from player at speed 1.2
+			send "&7[&anBase&7]   &9» &7Wystrzelono kule ghasta."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.fireball)"
+command /nBase:inventory [<player>]:
+	description: nBase » Otwieranie ekwipunku graczy.
+	executable by: players
+	aliases: inventory, invsee, openinv, oi
+	trigger:
+		if player has permission "nBase.inventory" or "nBase.*":
+			if arg 1 is not set:
+				open player's inventory for player
+				send "&7[&anBase&7]   &9» &7Otworzono ekwipunek gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.inventory.others" or "nBase.*":
+					open arg 1's inventory for player
+					send "&7[&anBase&7]   &9» &7Otworzono ekwipunek gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.inventory.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.inventory)"
+command /nBase:kick [<player>] [<text>]:
+	description: nBase » Wyrzucanie graczy z serwera.
+	executable by: players
+	aliases: kick
+	trigger:
+		if player has permission "nBase.kick" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/kick <gracz> [powod]"
+			else:
+				if arg 2 is not set:
+					kick arg 1 due to "&6Zostales wyrzucony z serwera. &7(Admin: &6%player%&7)"
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7wyrzucil gracza: &6%arg 1%&7."
+				else:
+					kick arg 1 due to "&6%colored arg 2% &7(Admin: &6%player%&7)"
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7wyrzucil gracza: &6%arg 1% &7za: &6%colored arg 2%"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.kick)"
+command /nBase:kickall [<text>]:
+	description: nBase » Wyrzucanie wszystkich graczy z serwera.
+	executable by: players
+	aliases: kick
+	trigger:
+		if player has permission "nBase.kickall" or "nBase.*":
+			if arg 1 is not set:
+				loop all players:
+					loop-player doesn't have permission "nBase.kickall" or "nBase.kickall.exempt" or "nBase.*":
+						kick loop-player due to "&7Zostales wyrzucony z serwera. &7(Admin: &6%player%&7)"
+				broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7wyrzucil &6wszystkich graczy&7."
+			else:
+				loop all players:
+					loop-player doesn't have permission "nBase.kickall" or "nBase.kickall.exempt" or "nBase.*":
+						kick loop-player due to "&6%colored arg 1% &7(Admin: &6%player%&7)"
+				broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7wyrzucil &6wszystkich graczy &7za &6%colored arg 1%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.kickall)"
+command /nBase:kill [<player>]:
+	description: nBase » Zabijanie graczy.
+	executable by: players
+	aliases: kill
+	trigger:
+		if player has permission "nBase.kill" or "nBase.*":
+			if arg 1 is not set:
+				kill player
+				send "&7[&anBase&7]   &9» &7Zabito gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.kill.others" or "nBase.*":
+					kill arg 1
+					send "&7[&anBase&7]   &9» &7Zabito gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.kill.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.kill)"
+command /nBase:lightning [<player>]:
+	description: nBase » Strzelanie piorunem w graczy.
+	executable by: players
+	aliases: lightning, light, thor, strike, smite
+	trigger:
+		if player has permission "nBase.lightning" or "nBase.*":
+			if arg 1 is not set:
+				if targeted block is not air:
+					strike lightning at targeted block's location
+					send "&7[&anBase&7]   &9» &7Strzelono piorunem w: &6%targeted block%&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Nie mozesz strzelic piorunem w powietrze."
+			else:
+				if player has permission "nBase.strike.others" or "nBase.*":
+					strike lightning at arg 1
+					send "&7[&anBase&7]   &9» &7Strzelono piorunem w gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.lightning.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.lightning)"
+command /nBase:spawnmob [<entity type>] [<integer=1>]:
+	description: nBase » Spawnowanie mobow.
+	executable by: players
+	aliases: spawnmob, smob, sm
+	trigger:
+		if player has permission "nBase.spawnmob" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/spawnmob <mob> [ilosc]"
+			else:
+				set {_} to value "numbers.spawnmob" get of "plugins/Skript/scripts/nBase/config.yml"
+				if arg 2 is bigger than {_}:
+					if player has permission "nBase.spawnmob.exempt" or "nBase.*":
+						set {_n} to arg 2
+						set {_m} to arg 1
+						spawn {_n} of {_m} above targeted block
+						send "&7[&anBase&7]   &9» &7Zespawnowano &6%{_n}% %{_m}%&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.spawnmob.exempt)"
+				else:
+					set {_n} to arg 2
+					set {_m} to arg 1
+					spawn {_n} of {_m} above targeted block
+					send "&7[&anBase&7]   &9» &7Zespawnowano &6%{_n}% %{_m}%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.spawnmob)"
+command /nBase:setspawn:
+	description: nBase » Ustawianie miejsca spawnu.
+	executable by: players
+	aliases: setspawn, ss
+	trigger:
+		if player has permission "nBase.setspawn" or "nBase.*":
+			set {nBase::spawn} to location of player
+			send "&7[&anBase&7]   &9» &7Ustawiono miejsce spawnu."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.setspawn)"
+command /nBase:spawn:
+	description: nBase » Teleportacja na spawn.
+	executable by: players
+	aliases: spawn
+	trigger:
+		if player has permission "nBase.spawn" or "nBase.*":
+			if {nBase::spawn} is set:
+				if player doesn't have permission "nBase.spawn.exempt" or "nBase.*":
+					set {_} to value "numbers.teleport" get of "plugins/Skript/scripts/nBase/config.yml"
+					set {_x.%player%} to x-location of player
+					set {_z.%player%} to z-location of player
+					set {_y.%player%} to y-location of player
+					send "&7[&anBase&7]   &9» &7Teleportacja na spawn za &6%{_}% sek&7. Nie mozesz sie ruszac."
+					loop {_} times:
+						if difference between x-location of player and {_x.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						if difference between z-location of player and {_z.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						if difference between y-location of player and {_y.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						remove 1 from {_}
+						if {_} is 0:
+							teleport player to {nBase::spawn}
+							send "&7[&anBase&7]   &9» &7Zostales przeniesiony na spawn."
+							stop
+						wait 1 second
+					stop
+				else:
+					teleport player to {nBase::spawn}
+					send "&7[&anBase&7]   &9» &7Zostales przeniesiony na spawn."
+			else:
+				send "&7[&anBase&7]   &9» &7Spawn nie zostal ustawiony. Skontaktuj sie z administratorem."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.spawn)"
+command /nBase:back:
+	description: nBase » Powracanie na miejsce ostatniego zgonu.
+	executable by: players
+	aliases: back
+	trigger:
+		if player has permission "nBase.back" or "nBase.*":
+			if {nBase::back::%player%} is set:
+				teleport player to {nBase::back::%player%}
+				send "&7[&anBase&7]   &9» &7Przeteleportowano do miejsca ostatniego zgonu."
+			else:
+				send "&7[&anBase&7]   &9» &7Twoje miejsce smierci nie zostalo zapisane."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.back)"
+command /nBase:delhome:
+	description: nBase » Usuwanie miejsca swojego domu.
+	executable by: players
+	aliases: delhome, deletehome, remhome, removehome
+	trigger:
+		if player has permission "nBase.delhome" or "nBase.*":
+			if {nBase::home::%player%} is set:
+				delete {nBase::home::%player%}
+				send "&7[&anBase&7]   &9» &7Usunieto miejsce twojego domu."
+			else:
+				send "&7[&anBase&7]   &9» &7Miejsce twojego domu nie zostalo ustawione."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.delhome)"
+command /nBase:sethome:
+	description: nBase » Ustawianie miejsca swojego domu.
+	executable by: players
+	aliases: sethome, createhome, crehome
+	trigger:
+		if player has permission "nBase.sethome" or "nBase.*":
+			set {nBase::home::%player%} to location of player
+			send "&7[&anBase&7]   &9» &7Ustawiono miejsce swojego domu."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.sethome)"
+command /nBase:home:
+	description: nBase » Teleportacja do miejsca swojego domu.
+	executable by: players
+	aliases: home
+	trigger:
+		if player has permission "nBase.home" or "nBase.*":
+			if {nBase::home::%player%} is set:
+				if player doesn't have permission "nBase.home.exempt" or "nBase.*":
+					set {_} to value "numbers.teleport" get of "plugins/Skript/scripts/nBase/config.yml"
+					set {_x.%player%} to x-location of player
+					set {_z.%player%} to z-location of player
+					set {_y.%player%} to y-location of player
+					send "&7[&anBase&7]   &9» &7Teleportacja do miejsca swojego domu za &6%{_}% sek&7. Nie mozesz sie ruszac."
+					loop {_} times:
+						if difference between x-location of player and {_x.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						if difference between z-location of player and {_z.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						if difference between y-location of player and {_y.%player%} is bigger than 0.5:
+							send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+							stop
+						remove 1 from {_}
+						if {_} is 0:
+							teleport player to {nBase::home::%player%}
+							send "&7[&anBase&7]   &9» &7Zostales przeniesiony do miejsca swojego domu."
+							stop
+						wait 1 second
+					stop
+				else:
+					teleport player to {nBase::home::%player%}
+					send "&7[&anBase&7]   &9» &7Zostales przeniesiony do miejsca swojego domu."
+			else:
+				send "&7[&anBase&7]   &9» &7Twoje miejsce domu nie zostalo ustawione."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.home)"
+command /nBase:delwarp [<text>]:
+	description: nBase » Usuwanie warpu.
+	executable by: players
+	aliases: delwarp, deletewarp, remwarp, removewarp
+	trigger:
+		if player has permission "nBase.delwarp" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/delwarp <tekst>"
+			else:
+				if {nBase::warp::%arg 1%} is set:
+					delete {nBase::warp::%arg 1%}
+					remove arg 1 from {nBase::warps::*}
+					send "&7[&anBase&7]   &9» &7Usunieto warp: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Nie znaleziono takiego warpa."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.delwarp)"
+command /nBase:setwarp [<text>]:
+	description: nBase » Ustawianie warpu.
+	executable by: players
+	aliases: setwarp, createwarp, crewarp
+	trigger:
+		if player has permission "nBase.setwarp" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/setwarp <tekst>"
+			else:
+				set {nBase::warp::%arg 1%} to location of player
+				remove arg 1 from {nBase::warps::*}
+				add arg 1 to {nBase::warps::*}
+				send "&7[&anBase&7]   &9» &7Ustawiono warp: &6%arg 1%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.setwarp)"
+command /nBase:warp [<text>]: 
+	description: nBase » Teleportacja do warpu.
+	executable by: players
+	aliases: warp
+	trigger:
+		if player has permission "nBase.warp" or "nBase.*":
+			if arg 1 is set:
+				if {nBase::warp::%arg 1%} is set:
+					if player doesn't have permission "nBase.warp.exempt" or "nBase.*":
+						set {_} to single value "numbers.teleport" get of "plugins/Skript/scripts/nBase/config.yml"
+						set {_x.%player%} to x-location of player
+						set {_z.%player%} to z-location of player
+						set {_y.%player%} to y-location of player
+						send "&7[&anBase&7]   &9» &7Teleportacja do na warp &6%arg 1% &7za &6%{_}% sek&7. Nie mozesz sie ruszac."
+						loop {_} times:
+							if difference between x-location of player and {_x.%player%} is bigger than 0.5:
+								send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+								stop
+							if difference between z-location of player and {_z.%player%} is bigger than 0.5:
+								send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+								stop
+							if difference between y-location of player and {_y.%player%} is bigger than 0.5:
+								send "&7[&anBase&7]   &9» &7Ruszyles sie, teleportacja zostala przerwana."
+								stop
+							remove 1 from {_}
+							if {_} is 0:
+								teleport player to {nBase::warp::%arg 1%}
+								send "&7[&anBase&7]   &9» &7Zostales przeniesiony do warpu: &6%arg 1%&7."
+								stop
+							wait 1 second
+						stop
+					else:
+						teleport player to {nBase::warp::%arg 1%}
+						send "&7[&anBase&7]   &9» &7Zostales przeniesiony do warpu: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Warp: &6%arg 1% &7nie zostal ustawiony."
+			else:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/warp <tekst>"
+				if player has permission "nBase.warp.list" or "nBase.*":
+					if {nBase::warps::*} is set:
+						send "&7[&anBase&7]   &9» &7Warpy: &6%{nBase::warps::*}%"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.warp)"
+command /nBase:jump:
+	description: nBase » Teleportacja na zaznaczony blok.
+	executable by: players
+	aliases: jump, jumpto, j, jt
+	trigger:
+		if player has permission "nBase.jump" or "nBase.*":
+			if targeted block is not air:
+				send "&7[&anBase&7]   &9» &7Przeteleportowano na koordynaty: &6%targeted block's location%&7."
+				teleport player above targeted block's location
+			else:
+				send "&7[&anBase&7]   &9» &7Nie mozesz skoczyc w powietrze."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.jump)"
+command /nBase:teleport [<player>] [<player>]:
+	description: nBase » Teleportacja graczy.
+	executable by: players
+	aliases: teleport, tp, bukkit:teleport, bukkit:tp, minecraft:teleport, minecraft:tp
+	trigger:
+		if player has permission "nBase.teleport" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/teleport <gracz> [gracz]"
+			else:
+				if arg 2 is not set:
+					teleport player to arg 1
+					send "&7[&anBase&7]   &9» &7Przeteleportowano do gracza: &6%arg 1%&7."
+				else:
+					if player has permission "nBase.teleport.others" or "nBase.*":
+						teleport arg 1 to arg 2
+						send "&7[&anBase&7]   &9» &7Przeteleportowano gracza: &6%arg 1% &7do gracza: &6%arg 2%&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.teleport.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.teleport)"
+command /nBase:teleportall:
+	description: nBase » Teleportacja wszystkich graczy do siebie.
+	executable by: players
+	aliases: teleportall, tpall
+	trigger:
+		if player has permission "nBase.teleportall" or "nBase.*":
+			teleport all players to player
+			broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7przeteleportowal wszystkich graczy do siebie."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.teleportall)"
+command /nBase:rename [<text>]:
+	description: nBase » Zmiana nazwy przedmiotu.
+	executable by: players
+	aliases: rename, name
+	trigger:
+		if player has permission "nBase.rename" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/rename <tekst>"
+			else:
+				set name of player's tool to "%colored arg 1%"
+				send "&7[&anBase&7]   &9» &7Zmieniono nazwe na: &f%colored arg 1%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.rename)"
+command /nBase:chat [<text="brak">] [<text>]:
+	description: nBase » Wlaczanie|Wylaczanie|Czyszczenie chatu.
+	executable by: players
+	aliases: chat, c
+	trigger:
+		if player has permission "nBase.chat" or "nBase.*":
+			if arg 1 is not "on" or "off" or "clear":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/chat <on|off|clear> [tekst]"
+				set {_} to {nBase::chat}
+				if {_} is false:
+					set {_} to "&cWYLACZONY"
+				else:
+					set {_} to "&aWLACZONY"
+				send "&7[&anBase&7]   &9» &7Chat: &a%{_}%&7."
+			if arg 1 is "on":
+				if {nBase::chat} is true:
+					send "&7[&anBase&7]   &9» &7Chat jest: &aWLACZONY&7."
+				else:
+					set {nBase::chat} to true
+					clear {nBase::chat::reason}
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan chatu na: &aWLACZONY&7."
+			if arg 1 is "off":
+				if {nBase::chat} is false:
+					send "&7[&anBase&7]   &9» &7Chat jest: &cWYLACZONY&7."
+				else:
+					if arg 2 is not set:
+						set {nBase::chat} to false
+						set {nBase::chat::reason} to colored arg 2
+						broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan chatu na: &cWYLACZONY&7."
+					else:
+						set {nBase::chat} to false
+						clear {nBase::chat::reason}
+						broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan chatu na: &cWYLACZONY&7. &7Powod: &6%colored arg 2%&7."
+			if arg 1 is "clear":
+				if arg 2 is not set:
+					loop 100 times:
+						send "" to all players
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &bWYCZYSCIL &7chat."
+				else:
+					loop 100 times:
+						send "" to all players
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &bWYCZYSCIL &7chat. &7Powod: &6%colored arg 2%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.chat)"
+command /nBase:blockcommands [<text="brak">] [<text>]:
+	description: nBase » Przypisywanie komend do bloku.
+	executable by: players
+	aliases: blockcommands, blockcommand, blockcmds, blockcmd, cmd, cmds
+	trigger:
+		if player has permission "nBase.blockcommands" or "nBase.*":
+			if arg 1 is not "add" or "clear" or "list":
+				send "&9=================================================="
+				send "  &7Uzyj: &6/blockcommands <argument> <komenda>&7:"
+				send "    &9» &6add <komenda> &8-- &7Dodaje komende do bloku."
+				send "    &9» &6clear &8-- &7Usuwa wszystkie komendy z bloku."
+				send "    &9» &6list &8-- &7Lista wszystkich komend bloku."
+				send "&9=================================================="
+			if arg 1 is "add":
+				if arg 2 is not set:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/blockcommands add <komenda>"
+				else:
+					add arg 2 to {nBase::blockcommands::%targeted block's location%::*}
+					send "&7[&anBase&7]   &9» &7Dodano komende: &6%arg 2%&7."
+			if arg 1 is "clear":
+				if {nBase::blockcommands::%targeted block's location%::*} is set:
+					clear {nBase::blockcommands::%targeted block's location%::*}
+					send "&7[&anBase&7]   &9» &7Usunieto wszystkie komendy z tego bloku."
+				else:
+					send "&7[&anBase&7]   &9» &7Do tego bloku nie ma przypisanych zadnych komend."
+			if arg 1 is "list":
+				if {nBase::blockcommands::%targeted block's location%::*} is set:
+					send "&9=================================================="
+					send "  &7Blok: &6%targeted block%"
+					send "  &7Komendy:"
+					loop {nBase::blockcommands::%targeted block's location%::*}:
+						send "    &9%loop-index%. &6%loop-value%"
+					send "&9=================================================="
+				else:
+					send "&7[&anBase&7]   &9» &7Do tego bloku nie ma przypisanych zadnych komend."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.blockcommands)"
+command /nBase:sign [<integer=0>] [<text>]:
+	description: nBase » Ustawianie lini na tabliczce.
+	executable by: players
+	aliases: sign
+	trigger:
+		if player has permission "nBase.sign" or "nBase.*":
+			if arg 1 is not 1 or 2 or 3 or 4:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/sign <1&7|&62&7|&63&7|&64> <tekst>"
+			else:
+				if arg 2 is set:
+					if targeted block is sign:
+						set {_} to arg 1
+						set line {_} of targeted block to "%colored arg 2%"
+						send "&7[&anBase&7]   &9» &7Zmieniono linie: &6%{_}% &7na: &6%colored arg 2%&7."
+					else:
+						send "&7[&anBase&7]   &9» &7Ten blok nie jest tabliczka."
+				else:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/sign <1&7|&62&7|&63&7|&64> <tekst>"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.sign)"
+command /nBase:setmotd [<text>]:
+	description: nBase » Ustawianie MOTD serwera.
+	executable by: players
+	aliases: setmotd
+	trigger:
+		if player has permission "nBase.setmotd" or "nBase.*":
+			if arg 1 is not set:
+				send "&9=================================================="
+				send "  &7Uzyj: &6/setmotd <tekst>"
+				send "  &7Motd: &7%server's motd%"
+				send "&9=================================================="
+			else:
+				set motd to "%colored arg 1%"
+				set {nBase::motd} to colored arg 1
+				send "&7[&anBase&7]   &9» &7Zmieniono motd na &7%colored arg 1%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.setmotd)"
+command /nBase:cannon [<entity type>]:
+	description: nBase » Strzelanie mobami.
+	executable by: players
+	aliases: cannon, shoot, shot
+	trigger:
+		if player has permission "nBase.cannon" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/cannon <mob>"
+			else:
+				shoot arg-1 at speed 1.2
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.cannon)"
+command /nBase:near:
+	description: nBase » Lista graczy w zasiegu x kratek od gracza.
+	executable by: players
+	aliases: near
+	trigger:
+		if player has permission "nBase.near" or "nBase.*":
+			set {_} to value "numbers.near" get of "plugins/Skript/scripts/nBase/config.yml"
+			send "&9=================================================="
+			send "  &7Zasieg: &6%{_}% &7kratek."
+			send "  &7Gracze:"
+			loop all players in radius {_} of player:
+				add 1 to {_p}
+				send "    &9» &6%loop-player% &8-- &a%distance between player and loop-player% &7kratek"
+			if {_p} is not set:
+				send "  &9» &6BRAK&7."
+			send "&9=================================================="
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.near)"
+command /nBase:tps:
+	description: nBase » Liczba TPS serwera.
+	executable by: players
+	aliases: tps
+	trigger:
+		if player has permission "nBase.tps" or "nBase.*":
+			send "&7[&anBase&7]   &9» &7Tps: &6%tps%&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.tps)"
+command /nBase:firework:
+	description: nBase » Strzelanie zwykla fajerwerka.
+	executable by: players
+	aliases: firework, fw
+	trigger:
+		if player has permission "nBase.firework" or "nBase.*":
+			shoot a firework from player at speed 0.001
+			send "&7[&anBase&7]   &9» &7Wystrzelono fajerwerke."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.firework)"
+command /nBase:seen [<offlineplayer>]:
+	description: nBase » Sprawdzanie, kiedy gracz ostatnio sie wylogowal.
+	executable by: players
+	aliases: seen, lastquit
+	trigger:
+		if player has permission "nBase.seen" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/seen <gracz>"
+			else:
+				if arg 1 has played before:
+					if {nBase::seen::%arg 1%} is set:
+						send "&7[&anBase&7]   &9» &7Gracz: &6%arg 1% &7ostatnio sie wylogowal sie: &6%{nBase::seen::%arg 1%}%&7."
+					else:
+						send "&7[&anBase&7]   &9» &7Gracz: &6%arg 1% &7jeszcze nigdy sie nie wylogowal."
+				else:
+					send "&7[&anBase&7]   &9» &7Nie znaleziono tego gracza w bazie."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.seen)"
+command /nBase:extinguish [<player>]:
+	description: nBase » Ugaszanie graczy.
+	executable by: players
+	aliases: extinguish, ext, unfire
+	trigger:
+		if player has permission "nBase.extinguish" or "nBase.*":
+			if arg 1 is not set:
+				extinguish player
+				send "&7[&anBase&7]   &9» &7Ugaszono gracza: &6%player%&7."
+			else:
+				if player has permission "nBase.extinguish.others" or "nBase.*":
+					extinguish arg 1
+					send "&7[&anBase&7]   &9» &7Ugaszono gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.extinguish.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.extinguish)"
+command /nBase:sudo [<player>] [<text>]:
+	description: nBase » Wykonywanie komend za innego gracza.
+	executable by: players
+	aliases: sudo
+	trigger:
+		if player has permission "nBase.sudo" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/sudo <gracz> <komenda>"
+			else:
+				if arg 2 is set:
+					if arg 1 has permission "nBase.sudo.exempt" or "nBase.*":
+						send "&7[&anBase&7]   &9» &7Nie mozesz wykonac komend za tego gracza."
+					else:
+						execute arg 1 command "%arg 2%"
+						send "&7[&anBase&7]   &9» &7Wykonano komende: &6/%arg 2% &7za gracza: &6%arg 1%&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/sudo <gracz> <komenda>"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.sudo)"
+command /nBase:weather [<text="brak">]:
+	description: nBase » Ustawianie pogody na swiecie.
+	executable by: players
+	aliases: weather, bukkit:weather, minecraft:weather
+	trigger:
+		if player has permission "nBase.weather" or "nBase.*":
+			if arg 1 is not "sun" or "rain" or "thunder":
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/weather <sun&7|&6rain&7|&6thunder>"
+			if arg 1 is "sun":
+				set weather in player's world to sun
+				send "&7[&anBase&7]   &9» &7Zmieniono pogode na: &6sloneczna&7."
+			if arg 1 is "rain":
+				set weather in player's world to rain
+				send "&7[&anBase&7]   &9» &7Zmieniono pogode na &6deszczowa&7."
+			if arg 1 is "thunder":
+				set weather in player's world to thunder
+				send "&7[&anBase&7]   &9» &7Zmieniono pogode na &6burzowa&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.weather)"
+command /nBase:whitelist [<text="brak">] [<text>]:
+	description: nBase » Zarzadzanie biala lista.
+	executable by: players
+	aliases: whitelist, wl, bukkit:whitelist, bukkit:wl, minecraft:whitelist, minecraft:wl
+	trigger:
+		if player has permission "nBase.whitelist" or "nBase.*":
+			if arg 1 is not "add" or "remove" or "on" or "off" or "list":
+				send "&9=================================================="
+				send "  &7Uzyj: &6/nBase <argument> <argument>&7:"
+				send "    &9» &6add <gracz> &8-- &7Dodawanie graczy do whitelisty."
+				send "    &9» &6remove <gracz> &8-- &7Usuwanie graczy do whitelisty."
+				send "    &9» &6on [powod] &8-- &7Wlaczanie whitelisty."
+				send "    &9» &6off &8-- &7Wylaczanie whitelisty."
+				send "    &9» &6list &8-- &7Lista graczy na whiteliscie."
+				send "&9=================================================="
+			if arg 1 is "add":
+				if arg 2 is not set:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/whitelist add <gracz>"
+				else:
+					remove arg 2 from {nBase::whitelist::list::*}
+					add arg 2 to {nBase::whitelist::list::*}
+					send "&7[&anBase&7]   &9» &7Dodano gracza: &6%arg 2% &7do whitelisty."
+			if arg 1 is "remove":
+				if arg 2 is not set:
+					send "&7[&anBase&7]   &9» &7Uzyj: &6/whitelist remove <gracz>"
+				else:
+					remove arg 2 from {nBase::whitelist::list::*}
+					send "&7[&anBase&7]   &9» &7Usunieto gracza: &6%arg 2% &7z whitelisty."
+			if arg 1 is "on":
+				if {nBase::whitelist::status} is true:
+					send "&7[&anBase&7]   &9» &7Whitelista jest: &aWLACZONA&7."
+				else:
+					if arg 2 is not set:
+						clear {nBase::whitelist::reason}
+						set {nBase::whitelist::status} to true
+						broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan whitelisty na: &aWLACZONA&7."
+					else:
+						set {nBase::whitelist::reason} to colored arg 2
+						set {nBase::whitelist::status} to true
+						broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan whitelisty na: &aWLACZONA&7. Powod: &6%arg 2%"
+			if arg 1 is "off":
+				if {nBase::whitelist::status} is false:
+					send "&7[&anBase&7]   &9» &7Whitelista jest: &cWYLACZONA7."
+				else:
+					clear {nBase::whitelist::reason}
+					set {nBase::whitelist::status} to false
+					broadcast "&7[&anBase&7]   &9» &7Administrator: &6%player% &7zmienil stan whitelisty na: &cWYLACZONA&7."
+			if arg 1 is "list":
+				send "&9=================================================="
+				send "  &7Graczy na whiteliscie: &6%size of {nBase::whitelist::list::*}%"
+				if {nBase::whitelist::list::*} is set:
+					send "  &7Gracze: &6%{nBase::whitelist::list::*}%"
+				else:
+					send "  &7Gracze: &6BRAK"
+				send "&9=================================================="
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.whitelist)"
+command /nBase:ping [<player>]:
+	description: nBase » Sprawdzanie pingu.
+	executable by: players
+	aliases: ping, pong
+	trigger:
+		if player has permission "nBase.ping" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Ping gracza: &6%player% &7to: &6%player's ping%&7."
+			else:
+				if player has permission "nBase.ping.others" or "nBase.*":
+					send "&7[&anBase&7]   &9» &7Ping gracza: &6%arg 1% &7to: &6%arg 1's ping%&7."
+				else:
+					send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.ping.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.ping)"
+command /nBase:up [<integer=0>]:
+	description: nBase » Teleportacja na dany punkt nad toba.
+	executable by: players
+	aliases: up
+	trigger:
+		if player has permission "nBase.up" or "nBase.*":
+			if arg 1 is greater or equal to arg 1:
+				set {_} to block arg meters above player
+				add 2 to {_}
+				if y-location of block at {_} is bigger than 254:
+					send "&7[&anBase&7]   &9» &7Ta lokacja jest za wysoko."
+				else:
+					teleport player to {_}
+					set block under player to glass
+					send "&7[&anBase&7]   &9» &7Przeteleportowano: &6%arg 1% &7blokow nad ciebie."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.up)"
+command /nBase:killall [<text="brak">]:
+	description: nBase » Zabijanie ludzi|podmiotow|mobow.
+	executable by: players
+	aliases: killall, ka
+	trigger:
+		if player has permission "nBase.killall" or "nBase.*":
+			if arg 1 is not "players" or "entities" or "mobs" or "all":
+				send "&9=================================================="
+				send "  &7Uzyj: &6/killall <argument>&7:"
+				send "   &9» &6players &8-- &7Zabijanie wszystkich graczy. (oprocz Ciebie)"
+				send "   &9» &6entities &8-- &7Zabijanie wszystkich podmiotow."
+				send "   &9» &6mobs &8-- &7Zabijanie wszystkich mobow."
+				send "&9=================================================="
+			if arg 1 is "players":
+				loop all players:
+					add loop-player to {_::*}
+					remove player from {_::*}
+					kill {_::*}
+				send "&7[&anBase&7]   &9» &7Zabito: &6%size of {_::*}% &7graczy."
+			if arg 1 is "entities":
+				loop all entities:
+					add loop-entity to {_::*}
+					remove all players from {_::*}
+					kill {_::*}
+				send "&7[&anBase&7]   &9» &7Zabito: &6%size of {_::*}% &7podmiotow."
+			if arg 1 is "mobs":
+				loop all creatures:
+					add loop-creature to {_::*}
+					delete loop-creature
+				send "&7[&anBase&7]   &9» &7Zabito: &6%size of {_::*}% &7mobow."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.killall)"
+command /nBase:powertool [<text>]:
+	description: nBase » Przypisywanie komend do itemow.
+	executable by: players
+	aliases: powertool, pt, powert, ptool
+	trigger:
+		if player has permission "nBase.killall" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/killall <komenda&7|&6-clear>"
+			if arg 1 is "-clear":
+				if player's tool is not air:
+					if {nBase::powertool::%player%::%player's tool%} is set:
+						delete {nBase::powertool::%player%::%player's tool%}
+						send "&7[&anBase&7]   &9» &7Usunieto komendy z twojego itemu."
+					else:
+						send "&7[&anBase&7]   &9» &7Nie ma zadnych komend przypisanych do: &6reka&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Nie mozesz usunac komend z: &6reka&7."
+			else:
+				if player's tool is not air:
+					set {nBase::powertool::%player%::%player's tool%} to arg 1
+					send "&7[&anBase&7]   &9» &7Przypisano komende: &6/%arg 1% &7do: &6%player's tool%&7."
+				else:
+					send "&7[&anBase&7]   &9» &7Nie mozesz dodac komend do: &6reka&7."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.powertool)"
+command /nBase:speed [<integer>] [<player>]:
+	description: nBase » Szybkosc latania|chodzenia.
+	executable by: players
+	aliases: speed, speedwalk, walkspeed, flyspeed
+	trigger:
+		if player has permission "nBase.speed" or "nBase.*":
+			if arg 1 is not set:
+				send "&7[&anBase&7]   &9» &7Uzyj: &6/speed <szybkosc> [gracz]"
+			else:
+				if arg 2 is not set:
+					if arg 1 is not 1:
+						set player's walk speed to arg 1
+						set player's fly speed to arg 1
+						send "&7[&anBase&7]   &9» &7Ustawiono szybkosc gracza: &6%player% &7na: &6%arg 1%&7."
+					else:
+						reset player's walk speed
+						reset player's fly speed
+						send "&7[&anBase&7]   &9» &7Ustawiono szybkosc gracza: &6%player% &7na: &6%arg 1%&7."
+				else:
+					if player has permission "nBase.speed.others" or "nBase.*":
+						if arg 1 is not 1:
+							set arg 2's walk speed to arg 1
+							set arg 2's fly speed to arg 1
+							send "&7[&anBase&7]   &9» &7Ustawiono szybkosc gracza: &6%arg 1% &7na: &6%arg 1%&7."
+						else:
+							reset arg 2's walk speed
+							reset arg 2's fly speed
+							send "&7[&anBase&7]   &9» &7Ustawiono szybkosc gracza: &6%arg 1% &7na: &6%arg 1%&7."
+					else:
+						send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.speed.others)"
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.speed)"
+command /nBase:motd:
+	description: nBase » Sprawdzanie wiadomosci powitalnej.
+	executable by: players
+	aliases: motd, messageoftheday
+	trigger:
+		if player has permission "nBase.motd" or "nBase.*":
+			set {_replace} to content of file "plugins/Skript/scripts/nBase/motd.txt"
+			if {_replace} is not "":
+				replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+				replace "{DATE.DAY}" with "%day%" in {_replace}
+				replace "{DATE.MONTH}" with "%month%" in {_replace}
+				replace "{DATE.YEAR}" with "%year%" in {_replace}
+				replace "{DATE.HOUR}" with "%hour%" in {_replace}
+				replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+				replace "{DATE.SECOND}" with "%second%" in {_replace}
+				replace "{ONLINE}" with "%number of players%" in {_replace}
+				replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+				replace "{NICK}" with "%player%" in {_replace}
+				replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+				replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+				replace "{SKVERSION}" with "%skript version%" in {_replace}
+				replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+				replace "{PING}" with "%player's ping%" in {_replace}
+				replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+				replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+				replace "{UUID}" with "%player's uuid%" in {_replace}
+				replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+				replace "{TPS}" with "%tps%" in {_replace}
+				replace "{REGION}" with "%region at player%" in {_replace}
+				replace "{WORLD}" with "%player's world%" in {_replace}
+				replace "{BIOME}" with "%biome at player%" in {_replace}
+				replace "{LOCATION}" with "%player's location%" in {_replace}
+				send "%colored {_replace}%"
+			else:
+				send "&7[&anBase&7]   &9» &7Plik: &6/plugins/Skript/scripts/nBase/motd.txt &7jest pusty."
+		else:
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.motd)"
+on script load:
+	if {nBase::motd} is set:
+		set motd to "%{nBase::motd}%"
+	set {_} to result of connect to "https://github.com/norbi002/nBase/raw/master/Wersja"
+	if {_} is not "1.0.1 FULL":
+		send "&7[&anBase&7]   &9» &7Wykryto, ze obecna wersja nie jest najnowsza." to console
+		send "&7[&anBase&7]   &9» &7Pobieranie..." to console
+		delete folder "plugins/Skript/scripts/nBase"
+		delete file "plugins/Skript/scripts/%script%.sk"
+		wait 10 ticks
+		download from "https://github.com/norbi002/nBase/raw/master/Skrypt" to "plugins/Skript/scripts/%script%.sk"
+		wait 10 ticks
+		execute console command "sk reload %script%"
+		send "&7[&anBase&7]   &9» &7Najnowsza wersja skryptu zostala pobrana." to console
+		send "&7[&anBase&7]   &9» &7Zyczymy milego uzytkowania." to console
+	if folder "plugins/Skript/scripts/nBase" doesn't exists:
+		create folder "plugins/Skript/scripts/nBase"
+		download from "https://github.com/norbi002/nBase/raw/master/Config" to "plugins/Skript/scripts/nBase/config.yml"
+		download from "https://github.com/norbi002/nBase/raw/master/Motd" to "plugins/Skript/scripts/nBase/motd.txt"
+	if file "plugins/Skript/scripts/nBase/config.yml" doesn't exists:
+		download from "https://github.com/norbi002/nBase/raw/master/Config" to "plugins/Skript/scripts/nBase/config.yml"
+	if file "plugins/Skript/scripts/nBase/motd.txt" doesn't exists:
+		download from "https://github.com/norbi002/nBase/raw/master/Motd" to "plugins/Skript/scripts/nBase/motd.txt"
+on ping:
+	if {nBase::motd} is set:
+		set motd to "%{nBase::motd}%"
+on respawn:
+	if {nBase::spawn} is set:
+		teleport player to {nBase::spawn}
+	else:
+		teleport player to world's spawn
+on damage:
+	if victim is a player:
+		if {nBase::god::%victim%} is true:
+			cancel event
+	if victim is not a wither or a ender dragon or a player:
+		set {_} to value "healthbar.enable" get of "plugins/Skript/scripts/nBase/config.yml" parsed as text
+		if {_} is "true":
+			set {_m} to colored value "healthbar.%victim%" get of "plugins/Skript/scripts/nBase/config.yml"
+			set {_s} to colored value "healthbar.style" get of "plugins/Skript/scripts/nBase/config.yml"
+			replace "{MOB}" with "%{_m}%" in {_s}
+			replace "{HEALTH}" with "%health of victim%" in {_s}
+			set displayname of victim to "%{_s}%"
+on sign change:
+	if player has permission "nBase.sign.color" or "nBase.*":
+		set {_} to single value "colored_sign" get of "plugins/Skript/scripts/nBase/config.yml"
+		{_} is "true":
+			set line 1 to "%colored line 1%"
+			set line 2 to "%colored line 2%"
+			set line 3 to "%colored line 3%"
+			set line 4 to "%colored line 4%"
+on chat:
+	set {_replace} to colored value "messages.chat" get of "plugins/Skript/scripts/nBase/config.yml"
+	replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+	replace "{DATE.DAY}" with "%day%" in {_replace}
+	replace "{DATE.MONTH}" with "%month%" in {_replace}
+	replace "{DATE.YEAR}" with "%year%" in {_replace}
+	replace "{DATE.HOUR}" with "%hour%" in {_replace}
+	replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+	replace "{DATE.SECOND}" with "%second%" in {_replace}
+	replace "{ONLINE}" with "%number of players%" in {_replace}
+	replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+	replace "{NICK}" with "%player%" in {_replace}
+	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+	replace "{SKVERSION}" with "%skript version%" in {_replace}
+	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{PING}" with "%player's ping%" in {_replace}
+	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+	replace "{UUID}" with "%player's uuid%" in {_replace}
+	replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+	replace "{TPS}" with "%tps%" in {_replace}
+	replace "{REGION}" with "%region at player%" in {_replace}
+	replace "{WORLD}" with "%player's world%" in {_replace}
+	replace "{BIOME}" with "%biome at player%" in {_replace}
+	replace "{LOCATION}" with "%player's location%" in {_replace}
+	replace "{MESSAGE}" with "%message%" in {_replace}
+	replace "{CMESSAGE}" with "%colored message%" in {_replace}
+	cancel event
+	if {nBase::chat} is false:
+		if player doesn't have permission "nBase.chat.write_off" or "nBase.*":
+			if {nBase::chat::reason} is set:
+				send "&7[&anBase&7]   &9» &7Chat jest: &cWYLACZONY&7. (%{nBase::chat::reason}%&7)"
+			else:
+				send "&7[&anBase&7]   &9» &7Chat jest: &cWYLACZONY&7."
+		else:
+			broadcast "%{_replace}%"
+	else:
+		broadcast "%{_replace}%"
+on connect:
+	if {nBase::whitelist::status} is true:
+		loop {nBase::whitelist::list::*}:
+			if {nBase::whitelist::list::*} contains player:
+				stop
+			else:
+				if player doesn't have permission "nBase.whitelist.join" or "nBase.*":
+					if {nBase::whitelist::reason} is set:
+						kick player due to "&6Nie jestes zapisany na whiteliscie. &7(Powod: &6%{nBase::whitelist::reason}%&7)"
+					else:
+						kick player due to "&6Nie jestes zapisany na whiteliscie."
+on join: 
+	set {_replace} to colored value "messages.join" get of "plugins/Skript/scripts/nBase/config.yml"
+	replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+	replace "{DATE.DAY}" with "%day%" in {_replace}
+	replace "{DATE.MONTH}" with "%month%" in {_replace}
+	replace "{DATE.YEAR}" with "%year%" in {_replace}
+	replace "{DATE.HOUR}" with "%hour%" in {_replace}
+	replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+	replace "{DATE.SECOND}" with "%second%" in {_replace}
+	replace "{ONLINE}" with "%number of players%" in {_replace}
+	replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+	replace "{NICK}" with "%player%" in {_replace}
+	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+	replace "{SKVERSION}" with "%skript version%" in {_replace}
+	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{PING}" with "%player's ping%" in {_replace}
+	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+	replace "{UUID}" with "%player's uuid%" in {_replace}
+	replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+	replace "{TPS}" with "%tps%" in {_replace}
+	replace "{REGION}" with "%region at player%" in {_replace}
+	replace "{WORLD}" with "%player's world%" in {_replace}
+	replace "{BIOME}" with "%biome at player%" in {_replace}
+	replace "{LOCATION}" with "%player's location%" in {_replace}
+	set join message to "%{_replace}%"
+	wait 1 tick
+	if player is "norbi002" or "tropereks":
+		send "&7[&anBase&7]   &9» &7Ten serwer uzywa &6nBase&7."
+	set {_replace} to content of file "plugins/Skript/scripts/nBase/motd.txt"
+	if {_replace} is not "":
+		replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+		replace "{DATE.DAY}" with "%day%" in {_replace}
+		replace "{DATE.MONTH}" with "%month%" in {_replace}
+		replace "{DATE.YEAR}" with "%year%" in {_replace}
+		replace "{DATE.HOUR}" with "%hour%" in {_replace}
+		replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+		replace "{DATE.SECOND}" with "%second%" in {_replace}
+		replace "{ONLINE}" with "%number of players%" in {_replace}
+		replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+		replace "{NICK}" with "%player%" in {_replace}
+		replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+		replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+		replace "{SKVERSION}" with "%skript version%" in {_replace}
+		replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+		replace "{PING}" with "%player's ping%" in {_replace}
+		replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+		replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+		replace "{UUID}" with "%player's uuid%" in {_replace}
+		replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+		replace "{TPS}" with "%tps%" in {_replace}
+		replace "{REGION}" with "%region at player%" in {_replace}
+		replace "{WORLD}" with "%player's world%" in {_replace}
+		replace "{BIOME}" with "%biome at player%" in {_replace}
+		replace "{LOCATION}" with "%player's location%" in {_replace}
+		send "%colored {_replace}%"
+on first join:
+	set {_replace} to colored value "messages.first_join" get of "plugins/Skript/scripts/nBase/config.yml"
+	replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+	replace "{DATE.DAY}" with "%day%" in {_replace}
+	replace "{DATE.MONTH}" with "%month%" in {_replace}
+	replace "{DATE.YEAR}" with "%year%" in {_replace}
+	replace "{DATE.HOUR}" with "%hour%" in {_replace}
+	replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+	replace "{DATE.SECOND}" with "%second%" in {_replace}
+	replace "{ONLINE}" with "%number of players%" in {_replace}
+	replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+	replace "{NICK}" with "%player%" in {_replace}
+	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+	replace "{SKVERSION}" with "%skript version%" in {_replace}
+	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{PING}" with "%player's ping%" in {_replace}
+	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+	replace "{UUID}" with "%player's uuid%" in {_replace}
+	replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+	replace "{TPS}" with "%tps%" in {_replace}
+	replace "{REGION}" with "%region at player%" in {_replace}
+	replace "{WORLD}" with "%player's world%" in {_replace}
+	replace "{BIOME}" with "%biome at player%" in {_replace}
+	replace "{LOCATION}" with "%player's location%" in {_replace}
+	set join message to "%{_}%"
+	if player is "norbi002" or "tropereks":
+		send "&7[&anBase&7]   &9» &7Ten serwer uzywa &6nBase&7."
+on quit:
+	set {_replace} to colored value "messages.quit" get of "plugins/Skript/scripts/nBase/config.yml"
+	replace "{MAXPLAYERS}" with "%max players%" in {_replace}
+	replace "{DATE.DAY}" with "%day%" in {_replace}
+	replace "{DATE.MONTH}" with "%month%" in {_replace}
+	replace "{DATE.YEAR}" with "%year%" in {_replace}
+	replace "{DATE.HOUR}" with "%hour%" in {_replace}
+	replace "{DATE.MINUTE}" with "%minute%" in {_replace}
+	replace "{DATE.SECOND}" with "%second%" in {_replace}
+	replace "{ONLINE}" with "%number of players%" in {_replace}
+	replace "{DISPLAY}" with "%colored player's display name%" in {_replace}
+	replace "{NICK}" with "%player%" in {_replace}
+	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
+	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
+	replace "{SKVERSION}" with "%skript version%" in {_replace}
+	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{PING}" with "%player's ping%" in {_replace}
+	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
+	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
+	replace "{UUID}" with "%player's uuid%" in {_replace}
+	replace "{WORLDTIME}" with "%time in player's world%" in {_replace}
+	replace "{TPS}" with "%tps%" in {_replace}
+	replace "{REGION}" with "%region at player%" in {_replace}
+	replace "{WORLD}" with "%player's world%" in {_replace}
+	replace "{BIOME}" with "%biome at player%" in {_replace}
+	replace "{LOCATION}" with "%player's location%" in {_replace}
+	set quit message to "%{_}%"
+	set {nBase::seen::%player%} to now
+on click:
+	if {nBase::blockcommands::%location of clicked block%::*} is set:
+		if player has permission "nBase.blockcommands.use" or "nBase.*":
+			cancel event
+			loop {nBase::blockcommands::%targeted block's location%::*}:
+				make player execute command "%loop-value%"
+		else:
+			cancel event
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.blockcommands.use)"
+	if {nBase::powertool::%player%::%player's tool%} is set:
+		execute player command "%{nBase::powertool::%player%::%player's tool%}%"
+on break:
+	if {nBase::blockcommands::%location of event-block%::*} is set:
+		if player has permission "nBase.blockcommands.break" or "nBase.*":
+			clear {nBase::blockcommands::%targeted block's location%::*}
+			send "&7[&anBase&7]   &9» &7Zniszczyles tabliczke z przypisanymi komendami."
+		else:
+			cancel event
+			send "&7[&anBase&7]   &9» &cNie masz uprawnien! &8(nBase.blockcommands.break)"
