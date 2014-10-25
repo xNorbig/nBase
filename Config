@@ -1,0 +1,108 @@
+#											 Zmienne do: chatu, wiadomości po dołączeniu, wyjściu, motd:
+#											 {MAXPLAYERS} - maksymalna ilość graczy
+#											 {DATE.DAY} - dzień
+#											 {DATE.MONTH} - miesiąc
+#											 {DATE.YEAR} - rok
+#											 {DATE.HOUR} - godzina
+#											 {DATE.MINUTE} - minuta
+#											 {DATE.SECOND} - sekunda
+#											 {ONLINE} - liczba graczy online
+#											 {DISPLAY} - nazwa wyswietlana
+#											 {NICK} - nick
+#											 {CBVERSION} - wersja craftbukkit'a
+#											 {WSVERSION} - wersja wildskript'a
+#											 {SKVERSION} - wersja skript'a
+#											 {NBVERSION} - wersja nBase
+#											 {PING} - ping
+#											 {GAMEMODE} - tryb gry
+#											 {PLAYERIP} - ip
+#											 {UUID} - uuid
+#											 {WORLDTIME} - czas na swiecie
+#											 {TPS} - tps
+#											 {REGION} - region
+#											 {WORLD} - swiat
+#											 {BIOME} - biom
+#											 {LOCATION} - polozenie
+messages:
+# ----- CHAT -----
+# Zmienne:
+# Te u samej góry oraz:
+# {CMESSAGE} - pokolorowana wiadomość
+# {MESSAGE}
+  chat: '&b{NICK}: &7{MESSAGE}'
+  
+# ----- WIADOMOŚCI PO WEJŚCIU/WYJŚCIU -----
+# [- Zmienne:
+# {NICK} - gracz
+# {DISPLAY} - nazwa wyświetlana
+  # [- Po dołączeniu
+  join: '&7Gracz: &6{NICK} &7dolaczyl do gry!'
+  
+  # [- Po pierwszym dołączeniu
+  first_join: '&7Gracz: &6{NICK} &7dolaczyl do gry poraz pierwszy!'
+  
+  # [- Po wyjściu
+  quit: '&7Gracz: &6{NICK} &7opuscil gre!'
+  
+numbers:
+# ----- Konfigurowanie liczb -----
+  # Maksymalna ilość do zespawnowanie mobów w komendzie: /spawnmob (Ominięcie limitu wymaga uprawnienia: nBase.spawnmob.exempt lub nBase.*
+  spawnmob: '10'
+  
+  # Ile sekund trzeba czekać na teleportację w komendach: /spawn, /home, /warp
+  teleport: '3'
+  
+  # Zasięg (w kratkach) w jakim znajduje graczy w komendzie: /near  
+  near: '200'
+  
+healthbar:
+# ----- Pasek życia mobów nad głową
+  # [- Czy włączyć ilość życia nad mobem
+  # true - tak
+  # false - nie
+  enable: 'true'
+  
+  # [- Styl paska życia
+  # {MOB} - mob
+  # {HEALTH} - życie
+  style: '{MOB} &7[&f{HEALTH}HP&7]'
+  
+  # [- Przyjazne moby
+  snowman: '&aBalwan'
+  ocelot: '&aOcelocik'
+  wolf: '&aPiezeg'
+  horse: '&aKon Rafal'
+  donkey: '&aOsiol'
+  mule: '&aMul'
+  mooshroom: '&aKruffka grzybuffka'
+  squid: '&aMeduza'
+  cow: '&aKruffka mleczna'
+  chicken: '&aKurczaczek z KFC'
+  villager: '&aWiesniak z wioski'
+  bat: '&aBatMan'
+  sheep: '&aOwca terrorystkka'
+  pig: '&aProsie'
+  iron golem: '&aIron Man'
+  
+  # [- Wrogie moby
+  enderman: '&cSlenderman'
+  zombie pigman: '&cCzlowiek swinia'
+  creeper: '&cTykajaca bomba'
+  ghast: '&cPlaczace dziecko'
+  magma cube: '&cCzarny skoczek'
+  wither skeleton: '&cSzkielet mudzin'
+  cave spider: '&cP&7&mirat&cajak Jaskiniowy'
+  spider: '&cSpiderman'
+  blaze: '&cOgnik'
+  silverfish: '&cRobaczek'
+  slime: '&cSkoczek'
+  skeleton: '&cTrup'
+  witch: '&cStraszna baba'
+  zombie: '&cZombie'
+  giant: '&cGigant'
+# ---------- Reszta ustawień ----------
+  # [- Czy właczyć kolorowanie tabliczek 
+  # true - tak
+  # false - nie
+  # (Wymaga też uprawnienia: nBase.sign.color lub nBase.*)
+colored_sign: 'true'
