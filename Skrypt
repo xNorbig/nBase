@@ -1298,7 +1298,7 @@ command /nBase:motd:
 				replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 				replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 				replace "{SKVERSION}" with "%skript version%" in {_replace}
-				replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+				replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 				replace "{PING}" with "%player's ping%" in {_replace}
 				replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 				replace "{PLAYERIP}" with "%player's ip%" in {_replace}
@@ -1318,7 +1318,7 @@ on script load:
 	if {nBase::motd} is set:
 		set motd to "%{nBase::motd}%"
 	set {_} to result of connect to "https://github.com/norbi002/nBase/raw/master/Wersja"
-	if {_} is not "1.0.1 FULL":
+	if {_} is not "1.2 FULL":
 		send "&7[&anBase&7]   &9» &7Wykryto, ze obecna wersja nie jest najnowsza." to console
 		send "&7[&anBase&7]   &9» &7Pobieranie..." to console
 		delete folder "plugins/Skript/scripts/nBase"
@@ -1380,7 +1380,7 @@ on chat:
 	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 	replace "{SKVERSION}" with "%skript version%" in {_replace}
-	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 	replace "{PING}" with "%player's ping%" in {_replace}
 	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
@@ -1430,7 +1430,7 @@ on join:
 	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 	replace "{SKVERSION}" with "%skript version%" in {_replace}
-	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 	replace "{PING}" with "%player's ping%" in {_replace}
 	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
@@ -1460,7 +1460,7 @@ on join:
 		replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 		replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 		replace "{SKVERSION}" with "%skript version%" in {_replace}
-		replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+		replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 		replace "{PING}" with "%player's ping%" in {_replace}
 		replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 		replace "{PLAYERIP}" with "%player's ip%" in {_replace}
@@ -1487,7 +1487,7 @@ on first join:
 	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 	replace "{SKVERSION}" with "%skript version%" in {_replace}
-	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 	replace "{PING}" with "%player's ping%" in {_replace}
 	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
@@ -1516,7 +1516,7 @@ on quit:
 	replace "{CBVERSION}" with "%craftbukkit version%" in {_replace}
 	replace "{WSVERSION}" with "%wildskript version%" in {_replace}
 	replace "{SKVERSION}" with "%skript version%" in {_replace}
-	replace "{NBVERSION}" with "1.0.1 FULL" in {_replace}
+	replace "{NBVERSION}" with "1.2 FULL" in {_replace}
 	replace "{PING}" with "%player's ping%" in {_replace}
 	replace "{GAMEMODE}" with "%player's gamemode%" in {_replace}
 	replace "{PLAYERIP}" with "%player's ip%" in {_replace}
