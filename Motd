@@ -1,0 +1,27 @@
+# Zmienne:
+# {MAXPLAYERS} - maksymalna ilość graczy
+# {DATE.DAY} - dzień
+# {DATE.MONTH} - miesiąc
+# {DATE.YEAR} - rok
+# {DATE.HOUR} - godzina
+# {DATE.MINUTE} - minuta
+# {DATE.SECOND} - sekunda
+# {ONLINE} - liczba graczy online
+# {DISPLAY} - nazwa wyswietlana
+# {NICK} - nick
+# {CBVERSION} - wersja craftbukkit'a
+# {WSVERSION} - wersja wildskript'a
+# {SKVERSION} - wersja skript'a
+# {NBVERSION} - wersja nBase
+# {PING} - ping
+# {GAMEMODE} - tryb gry
+# {PLAYERIP} - ip
+# {UUID} - uuid
+# {WORLDTIME} - czas na swiecie
+# {TPS} - tps
+# {REGION} - region
+# {WORLD} - swiat
+# {BIOME} - biom
+# {LOCATION} - polozenie
+&7Witaj: &6{DISPLAY} &7na serwerze!
+Graczy: &6{ONLINE}&7/&6{MAXPLAYERS}
